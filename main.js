@@ -184,7 +184,7 @@ loader.load('/np/flat_screen_television.glb', function (gltf) {
 
     // Add TV screen as a separate plane with an image texture
     const textureLoader = new THREE.TextureLoader();
-    const tvScreenTexture = textureLoader.load('/tvscreen5.png');
+    const tvScreenTexture = textureLoader.load('/np/tvscreen5.png');
     
     const screenGeometry = new THREE.PlaneGeometry(3.9, 1.7);
     const screenMaterial = new THREE.MeshBasicMaterial({
@@ -221,7 +221,7 @@ loader.load('/np/vending_machine.glb', function (gltf) {
 
     // Add a texture to the vending screen
     const textureLoader = new THREE.TextureLoader();
-    const vendingScreenTexture = textureLoader.load('/vendingscreen2.png');
+    const vendingScreenTexture = textureLoader.load('/np/vendingscreen2.png');
 
     // Create the screen geometry and material using the image texture
     const vendingScreenGeometry = new THREE.PlaneGeometry(0.57, 1.15);
@@ -413,7 +413,7 @@ function addGlowingTextToScreen(text) {
 // Function to add the second glowing text below the arcade machine
 function addSecondGlowingTextForArcade(text) {
     const fontLoader = new FontLoader();
-    fontLoader.load('/MKX Title_Regular.json', function (font) {
+    fontLoader.load('/np/MKX Title_Regular.json', function (font) {
         const textGeometry = new TextGeometry(text, {
             font: font,
             size: 0.07,  
@@ -696,7 +696,7 @@ function createRestartButton() {
 
     // Add text to the button
     const fontLoader = new FontLoader();
-    fontLoader.load('/SpaceMadness_Regular.json', function (font) {
+    fontLoader.load('/np/SpaceMadness_Regular.json', function (font) {
         const buttonTextGeometry = new TextGeometry('Back', {
             font: font,
             size: 0.25,
@@ -733,7 +733,7 @@ function createVendingBackButton() {
 
     // Add text to the vending back button
     const fontLoader = new FontLoader();
-    fontLoader.load('/SpaceMadness_Regular.json', function (font) {
+    fontLoader.load('/np/SpaceMadness_Regular.json', function (font) {
         const buttonTextGeometry = new TextGeometry('Back', {
             font: font,
             size: 0.25,
@@ -768,7 +768,7 @@ function createTVBackButton() {
 
     // Add text to the TV back button
     const fontLoader = new FontLoader();
-    fontLoader.load('/SpaceMadness_Regular.json', function (font) {
+    fontLoader.load('/np/SpaceMadness_Regular.json', function (font) {
         const buttonTextGeometry = new TextGeometry('Back', {
             font: font,
             size: 0.25,
