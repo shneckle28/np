@@ -134,7 +134,7 @@ function createTVVideoTexture() {
 }
 
 // Load the pub model
-loader.load('/free_cartoon_house_pub.glb', function (gltf) {
+loader.load('/np/free_cartoon_house_pub.glb', function (gltf) {
     const model = gltf.scene;
     model.position.set(0, -0.23, 0);
     model.castShadow = true;
@@ -145,7 +145,7 @@ loader.load('/free_cartoon_house_pub.glb', function (gltf) {
 });
 
 // Load the arcade machine
-loader.load('/arcade_machine__automaping.glb', function (gltf) {
+loader.load('/np/arcade_machine__automaping.glb', function (gltf) {
     arcadeMachine = gltf.scene;
     arcadeMachine.position.set(-5.5, -0.23, -3.5);
     arcadeMachine.scale.set(1, 1, 1);
@@ -173,7 +173,7 @@ loader.load('/arcade_machine__automaping.glb', function (gltf) {
 });
 
 // Load the TV model and set its position and scale
-loader.load('/flat_screen_television.glb', function (gltf) {
+loader.load('/np/flat_screen_television.glb', function (gltf) {
     tvModel = gltf.scene;
     tvModel.position.set(1.1, 12.5, -4.5); 
     tvModel.scale.set(0.07, 0.07, 0.07); 
@@ -212,7 +212,7 @@ loader.load('/flat_screen_television.glb', function (gltf) {
 });
 
 // Load the vending machine model and set its position, scale, and rotation
-loader.load('/vending_machine.glb', function (gltf) {
+loader.load('/np/vending_machine.glb', function (gltf) {
     vendingMachine = gltf.scene;
     vendingMachine.position.set(3, 2.2, 1.65); 
     vendingMachine.scale.set(2, 2, 2); 
@@ -384,7 +384,7 @@ buttonGroup.rotation.y = Math.PI / 1;
 // Function to add glowing text to the green screen
 function addGlowingTextToScreen(text) {
     const fontLoader = new FontLoader();
-    fontLoader.load('/MKX Title_Regular.json', function (font) {
+    fontLoader.load('/np/MKX Title_Regular.json', function (font) {
         const textGeometry = new TextGeometry(text, {
             font: font,
             size: 0.07,  
@@ -639,7 +639,7 @@ controls.enablePan = false;
 // Add text on the floor
 function addText() {
     const fontLoader = new FontLoader();
-    fontLoader.load('/SpaceMadness_Regular.json', function (font) {
+    fontLoader.load('/np/SpaceMadness_Regular.json', function (font) {
         const textGeometry = new TextGeometry("Noah's Portfolio", {
             font: font,
             size: 2,
