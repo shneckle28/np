@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body, html {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        /* Ensure canvas for 3D scene covers the full page */
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;  /* Ensures the 3D scene is behind other content */
+            width: 100vw;
+            height: 100vh;
+        }
+        #resume-container {
+            display: none;
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            background-color: #f0f0f0;
+            border: 2px solid #000;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        #resume-content {
+            font-size: 16px;
+            color: #333;
+        }
+        h1 {
+            font-size: 24px;
+            color: #4A4A4A;
+        }
+        h2 {
+            font-size: 20px;
+            color: #5A5A5A;
+        }
+        h3 {
+            font-size: 18px;
+            color: #666;
+        }
+        a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        #resume-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        #open-resume-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: #3c0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+    </style>
+    <title>Portfolio</title>
+  <script type="module" crossorigin src="/assets/index-CplBNQPt.js"></script>
+</head>
+<body>
+
+    <button id="open-resume-btn">2D Resume</button>
+
+    <div id="resume-container">
+        <div id="resume-close">X</div>
+        <div id="resume-content">
+            <!-- Resume Content -->
+            <h1>Noah Milliken</h1>
+
+            <h2>3D Website Controls</h2>
+            <p>Scroll to zoom in or out. Hold left click and drag to look around the scene.
+            Most elements found here can be found in the 3D scene by interacting with the TV, Arcade Machine, and Vending Machine.</p>
+
+            <h2>Skills Summary</h2>
+            <p>Hardworking, dedicated individual with a strong work ethic, excellent people skills, 
+            strategic communications experience, cyber security knowledge, and a desire to succeed. Other notable skills include video game creation, Minecraft server owner, discord server creator/moderator, graphic designer, and social media coordination.</p>
+
+            <h2>Goals</h2>
+            <p>To obtain experience in the business sector, engage in marketing and communications, further my knowledge on cyber security, complete a degree in strategic communications with a minor in cyber security from Old Dominion University and move on to get my masters in cyber security.</p>
+
+            <h2>Education</h2>
+            <h3>Floyd E. Kellam High School, Virginia Beach, VA</h3>
+            <p>Advanced Diploma, June 2021</p>
+            <h3>Old Dominion University, Norfolk, VA</h3>
+            <p>College of Arts and Letters, Strategic Communications<br>
+            <em>Currently enrolled, senior status</em></p>
+
+            <h2>Experience</h2>
+            <h3>For Stage Rentals (Sept 2021 - Sept 2023)</h3>
+            <p>Manage music equipment delivery, setup, use, and breakdown for major performances in the Southeast region of the United States. Communicate with performers, stage managers, and event coordinators. Supervise stagehands assisting with the equipment.</p>
+            
+            <h3>Old Dominion University, Strome College of Business (Oct 2022 - May 2023)</h3>
+            <p>Junior intern for Associate Dean Connie Merriman, developed marketing and communication materials for College of Business majors and events. Utilized Adobe Photoshop, Canva, and applied creative and contemporary approaches to student and community outreach.</p>
+
+            <h3>Prima Pizza (Jan 2021 - Sept 2021)</h3>
+            <p>Pizza delivery throughout Sandbridge and Pungo area. Managed money and closing the restaurant.</p>
+
+            <h3>Five Guys Burgers and Fries (May 2019 - Jan 2021)</h3>
+            <p>Performed all roles: cooking, taking orders, fulfilling orders, and closing. Perfect ratings on performance reviews.</p>
+
+            <h3>Old Dominion University, College of Arts and Letters (Apr 2024 - Present)</h3>
+            <p>Managed updating/virtualization of employee files, resolved tech issues, handled phone support for students/faculty, restocked supplies.</p>
+
+            <h2>Community Service</h2>
+            <h3>School Supply Drive</h3>
+            <p>Collected and donated school supplies from three Virginia Beach schools to two elementary schools in Norfolk.</p>
+            <h3>Coat Drive</h3>
+            <p>Collected and donated coats to PB Young Elementary School in Norfolk.</p>
+
+            <h2>Examples of Projects</h2>
+
+            <h3>Discords:</h3>
+            <ul>
+                <li><a href="https://discord.gg/Wgv7YkgBuP">Minecraft Server Discord</a></li>
+                <li><a href="https://discord.com/channels/minecraft-advertisement-993668335642349579">Advertising Discord</a></li>
+                <li><a href="https://discord.gg/5PB7Q9MEsp">Club Discord</a></li>
+                <li><a href="https://discord.gg/w9PFM9PKfJ">Streamers Discord</a></li>
+            </ul>
+            
+            <h3>Created Games:</h3>
+            <ul>
+                <li><a href="https://gd.games/firesec/journys-beginning">Journey's Beginning (Custom Game)</a></li>
+                <li><a href="https://mangrove.tebex.io/">Minecraft Server Website</a></li>
+            </ul>
+            
+            <h3>Social Media:</h3>
+            <ul>
+                <li><a href="https://www.instagram.com/systemsurgeons/">System Surgeons (Project)</a></li>
+                <li><a href="https://www.instagram.com/noah_milliken_757/">Personal Instagram</a></li>
+                <li><a href="https://www.instagram.com/forstagerentals/">ForStageRentals Instagram</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const openResumeBtn = document.getElementById('open-resume-btn');
+        const resumeContainer = document.getElementById('resume-container');
+        const resumeCloseBtn = document.getElementById('resume-close');
+        let isPaused = false;
+
+        // Function to pause the 3D scene
+        function pause3DScene() {
+            if (!isPaused) {
+                cancelAnimationFrame(animationFrameId);  // This stops the animation loop
+                isPaused = true;
+            }
+        }
+
+        // Function to resume the 3D scene
+        function resume3DScene() {
+            if (isPaused) {
+                animate();  // This resumes the animation loop
+                isPaused = false;
+            }
+        }
+
+        openResumeBtn.addEventListener('click', () => {
+            resumeContainer.style.display = 'block';
+            pause3DScene();  // Pause the 3D scene when resume is opened
+        });
+
+        resumeCloseBtn.addEventListener('click', () => {
+            resumeContainer.style.display = 'none';
+            resume3DScene();  // Resume the 3D scene when resume is closed
+        });
+    </script>
+
+
+</body>
+</html>
