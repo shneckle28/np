@@ -808,76 +808,80 @@ createStars();
 // Raycaster for detecting clicks (including buttons, arcade machine, TV, and vending machine)
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
-
 window.addEventListener('click', function (event) {
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    raycaster.setFromCamera(mouse, camera);
+    
+    handleClickOrTap(event.clientX, event.clientY);
+}, false);
 
+window.addEventListener('touchend', function (event) {
+    if (event.changedTouches.length === 1) {
+        const touch = event.changedTouches[0];
+        handleClickOrTap(touch.clientX, touch.clientY);
+    }
+}, false);
+function handleClickOrTap(clientX, clientY) {
+    mouse.x = (clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(scene.children, true);
     intersects.forEach((intersect) => {
         if (intersect.object.userData.clickable) {
-            
-            // Handle arcade machine screen click
+            // Handle arcade machine screen click or tap
             if (intersect.object === screen && !screenClicked) {
                 toggleVideoScreenAndZoom();
-            } 
-
-            // Handle glowing text click
+            }
+            // Handle glowing text click or tap
             else if (intersect.object === glowingText) {
                 const link = intersect.object.userData.link;
                 if (link) {
                     window.open(link, '_blank');
                 }
-            } 
-             // Handle second glowing text click for the arcade machine
-             else if (intersect.object === secondGlowingText) {
+            }
+            // Handle second glowing text click or tap for the arcade machine
+            else if (intersect.object === secondGlowingText) {
                 const link = intersect.object.userData.link;
                 if (link) {
-                    window.open(link, '_blank'); 
+                    window.open(link, '_blank');
                 }
             }
-            // Handle arcade machine back button click
+            // Handle arcade machine back button click or tap
             else if (intersect.object === buttonMesh) {
                 resetScene();
             }
-
-            // Handle vending machine screen click
+            // Handle vending machine screen click or tap
             else if (intersect.object === vendingScreen && !vendingScreenClicked) {
                 handleVendingScreenClick();
-            } 
-
-            // Handle vending machine back button click
+            }
+            // Handle vending machine back button click or tap
             else if (intersect.object === vendingButtonMesh) {
                 resetVendingScene();
             }
-
-            // Handle TV buttons click (Check if it is any of the TV buttons)
+            // Handle TV buttons click or tap (Check if it is any of the TV buttons)
             else if (intersect.object.parent === buttonGroup) {
                 const link = intersect.object.userData.link;
                 if (link) {
                     window.open(link, '_blank');
                 }
             }
-            // Handle vending machine buttons click
+            // Handle vending machine buttons click or tap
             else if (intersect.object.parent === vendingButtonsGroup) {
                 const link = intersect.object.userData.link;
                 if (link) {
                     window.open(link, '_blank');
                 }
             }
-            // Handle TV screen click
+            // Handle TV screen click or tap
             else if (intersect.object === tvScreen) {
                 handleTVScreenClick();
             }
-
-            // Handle TV back button click
+            // Handle TV back button click or tap
             else if (intersect.object === tvBackButtonMesh) {
                 resetTVScene(); 
             }
         }
     });
-});
+}
 
 // Bloom Pass and Layer Configuration
 const composer = new EffectComposer(renderer);
