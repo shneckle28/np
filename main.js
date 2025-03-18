@@ -2,6 +2,7 @@
 //I have added detailed notes to this code just incase you are curious about how I did certain things.
 //Thank you for your intrest in my project!!
 
+import gsap from "gsap";
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
@@ -171,6 +172,96 @@ loader.load('/np/arcade_machine__automaping.glb', function (gltf) {
     // Create restart button
     createRestartButton();
 });
+
+// Create the blog paper (Ensuring it's a single entity with correct text)
+const paperGeometry = new THREE.PlaneGeometry(1.5, 2);
+const paperMaterial = new THREE.MeshStandardMaterial({
+    color: 0xffffff, // Light tan/white like real paper
+    side: THREE.DoubleSide, // Ensure visibility from both sides
+    roughness: 0.8,
+});
+
+// Create the paper mesh
+const blogPaper = new THREE.Mesh(paperGeometry, paperMaterial);
+blogPaper.position.set(0, 2.5, 4.5);
+blogPaper.rotation.y = Math.PI / 0.1;
+blogPaper.userData.clickable = true; // Enable interaction
+scene.add(blogPaper);
+
+// Function to create properly oriented text on the paper
+function createBlogTexture() {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1024; // Increase width for better text fitting
+    canvas.height = 2048; // Increase height to match proportions
+    const ctx = canvas.getContext("2d");
+
+    // Background color (same as paper)
+    ctx.fillStyle = "#A9A9A9"; 
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Ensure the text is correctly positioned (flip the canvas)
+    ctx.translate(0, canvas.height);
+    ctx.scale(1, -1);
+
+    // Blog title and content with better font scaling
+    ctx.fillStyle = "black";
+    ctx.font = "bold 80px Arial"; // Bigger font for clarity
+    ctx.fillText("--Blog Post--", 250, 150);
+    ctx.fillText("Optimized For Mobile", 100, 300);
+    ctx.font = "bold 60px Arial"; // Adjusted font size for readability
+    ctx.fillText("Making this 3d scene mobile", 50, 450);
+    ctx.fillText("friendly was not easy. I had to", 50, 550);
+
+    // Create texture and apply to paper
+    const blogTexture = new THREE.CanvasTexture(canvas);
+    blogTexture.needsUpdate = true;
+    blogTexture.flipY = false; // Prevents text from appearing upside down
+    blogPaper.material.map = blogTexture;
+    blogPaper.material.needsUpdate = true;
+}
+
+// Apply the corrected text texture to the paper
+createBlogTexture();
+
+let zoomCompleted = false; // Flag to track when zoom is done
+
+// Define paper's original position
+const paperOriginalPosition = new THREE.Vector3();
+paperOriginalPosition.copy(blogPaper.position); // Save the original position
+
+// Function to handle paper hover movement (only when zoomed in and zoom is completed)
+function handlePaperHover(event) {
+    if (!blogClicked || !zoomCompleted) return; // Ensure this only happens when zoomed in and completed
+
+    const mouse = new THREE.Vector2(
+        (event.clientX / window.innerWidth) * 2 - 1,
+        -(event.clientY / window.innerHeight) * 2 + 1
+    );
+
+    // Raycasting to check if the mouse is hovering over the paper
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObject(blogPaper);
+
+    if (intersects.length > 0) {
+        // Move the paper slightly forward when hovered
+        gsap.to(blogPaper.position, { 
+            z: paperOriginalPosition.z + 2.5, // Moves it forward
+            duration: 0.3, 
+            ease: "power2.out" 
+        });
+    } else {
+        // Reset the paper position when the mouse leaves
+        gsap.to(blogPaper.position, { 
+            z: paperOriginalPosition.z, 
+            duration: 0.3, 
+            ease: "power2.out" 
+        });
+    }
+}
+
+// Add event listener for mouse movement (only when zoomed in and completed)
+window.addEventListener("mousemove", handlePaperHover);
 
 // Load the TV model and set its position and scale
 loader.load('/np/flat_screen_television.glb', function (gltf) {
@@ -526,6 +617,7 @@ function toggleVideoScreenAndZoom() {
 
 // Zoom functionality when the arcade screen is clicked
 function zoomToScreen() {
+    controls.enabled = false;
     const zoomDuration = 2000;
     const zoomStart = camera.position.clone();
     const zoomEnd = targetPosition;
@@ -574,6 +666,33 @@ function zoomToVendingScreen() {
     requestAnimationFrame(zoomLoop);
 }
 
+const blogTargetPosition = new THREE.Vector3(0, 2.5, 10); // Adjust zoomed-in position
+let blogClicked = false;
+function zoomToBlog() {
+    if (blogClicked) return; // Prevent multiple clicks
+    blogClicked = true;
+    controls.enabled = false; // Disable orbit controls during zoom
+
+    const zoomDuration = 2000;
+    const startTime = Date.now();
+    const zoomStart = camera.position.clone();
+    const zoomEnd = blogTargetPosition;
+
+    function zoomLoop() {
+        const elapsed = Date.now() - startTime;
+        const t = Math.min(elapsed / zoomDuration, 1);
+        camera.position.lerpVectors(zoomStart, zoomEnd, t);
+
+        if (t < 1) {
+            requestAnimationFrame(zoomLoop);
+        } else {
+            zoomCompleted = true; // Enable paper movement after zoom finishes
+            controls.enabled = false; // Keep controls disabled to prevent movement
+        }
+    }
+    requestAnimationFrame(zoomLoop);
+}
+
 // Restart the scene and reinitialize everything
 function resetScene() {
     video.currentTime = 0;
@@ -598,6 +717,22 @@ function resetScene() {
     if (secondGlowingText) {
         arcadeMachine.remove(secondGlowingText);
     }
+}
+
+function resetBlogView() {
+    blogClicked = false;
+    zoomCompleted = false; // Ensure the zoom state resets
+    camera.position.set(0, 50, 40); // Reset camera position
+    controls.enabled = true;
+
+    // Reset the paper's position smoothly
+    gsap.to(blogPaper.position, {
+        x: paperOriginalPosition.x,
+        y: paperOriginalPosition.y,
+        z: paperOriginalPosition.z,
+        duration: 0.5, 
+        ease: "power2.out"
+    });
 }
 
 // Reset the vending machine scene when the back button is clicked
@@ -870,6 +1005,12 @@ function handleClickOrTap(clientX, clientY) {
                 if (link) {
                     window.open(link, '_blank');
                 }
+            }
+            // Handle blog paper click
+            else if (intersect.object === blogPaper && !blogClicked) {
+            zoomToBlog();
+            } else if (blogClicked) {
+            resetBlogView();
             }
             // Handle TV screen click or tap
             else if (intersect.object === tvScreen) {
