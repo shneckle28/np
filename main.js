@@ -183,7 +183,7 @@ const paperMaterial = new THREE.MeshStandardMaterial({
 
 // Create the paper mesh
 const blogPaper = new THREE.Mesh(paperGeometry, paperMaterial);
-blogPaper.position.set(0, 2.5, 4.5);
+blogPaper.position.set(-0.7, 2.5, 4.7);
 blogPaper.rotation.y = Math.PI / 0.1;
 blogPaper.userData.clickable = true; // Enable interaction
 scene.add(blogPaper);
