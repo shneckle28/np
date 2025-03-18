@@ -259,7 +259,6 @@ function handlePaperHover(event) {
         });
     }
 }
-
 // Add event listener for mouse movement (only when zoomed in and completed)
 window.addEventListener("mousemove", handlePaperHover);
 
