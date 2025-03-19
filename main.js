@@ -183,7 +183,7 @@ const paperMaterial = new THREE.MeshStandardMaterial({
 
 // Create the paper mesh
 const blogPaper = new THREE.Mesh(paperGeometry, paperMaterial);
-blogPaper.position.set(-0.7, 2.5, 4.7);
+blogPaper.position.set(-0.7, 2.5, 4.6);
 blogPaper.rotation.y = Math.PI / 0.1;
 blogPaper.userData.clickable = true; // Enable interaction
 scene.add(blogPaper);
@@ -665,7 +665,7 @@ function zoomToVendingScreen() {
     requestAnimationFrame(zoomLoop);
 }
 
-const blogTargetPosition = new THREE.Vector3(0, 2.5, 10); // Adjust zoomed-in position
+const blogTargetPosition = new THREE.Vector3(-0.7, 2.5, 10); // Adjust zoomed-in position
 let blogClicked = false;
 function zoomToBlog() {
     if (blogClicked) return; // Prevent multiple clicks
