@@ -208,9 +208,22 @@ function createBlogTexture() {
     ctx.font = "bold 80px Arial"; // Bigger font for clarity
     ctx.fillText("--Blog Post--", 250, 150);
     ctx.fillText("Optimized For Mobile", 100, 300);
-    ctx.font = "bold 60px Arial"; // Adjusted font size for readability
+    ctx.font = "bold 70px Arial"; // Adjusted font size for readability
     ctx.fillText("Making this 3d scene mobile", 50, 450);
-    ctx.fillText("friendly was not easy. I had to", 50, 550);
+    ctx.fillText("friendly was not easy. I", 50, 550);
+    ctx.fillText("had to edit my code and", 50, 650);
+    ctx.fillText("deploy to GitHub multiple", 50, 750);
+    ctx.fillText("times. I also had to make", 50, 850);
+    ctx.fillText("sure mobile taps, and", 50, 950);
+    ctx.fillText("video textures were still", 50, 1050);
+    ctx.fillText("working on phones. Coding", 50, 1150);
+    ctx.fillText("all of this was a challenging", 50, 1250); 
+    ctx.fillText("but rewarding experience.", 50, 1350);
+    ctx.fillStyle = "blue";
+    ctx.font = "bold 70px Arial";
+    ctx.fillText("If you are seeing this click", 40, 1600);
+    ctx.fillText("2D Resume in the left corner", 40, 1700);
+    ctx.fillText("for website controls", 40, 1800);
 
     // Create texture and apply to paper
     const blogTexture = new THREE.CanvasTexture(canvas);
