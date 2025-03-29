@@ -2,6 +2,8 @@
 //I have added detailed notes to this code just incase you are curious about how I did certain things.
 //Thank you for your intrest in my project!!
 
+//Get rid of slash before assets in html after build!!
+
 import gsap from "gsap";
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
