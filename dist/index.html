@@ -83,6 +83,49 @@
             cursor: pointer;
             z-index: 1000;
         }
+        #blog-container {
+    display: none;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    background-color: #fff;
+    border: 2px solid #000;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+#blog-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#open-blog-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: #003c00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+}
     </style>
     <title>Portfolio</title>
   <script type="module" crossorigin src="assets/index-BXMFfh0x.js"></script>
@@ -90,6 +133,7 @@
 <body>
 
     <button id="open-resume-btn">2D Resume</button>
+    <button id="open-blog-btn">Blog</button>
 
     <div id="resume-container">
         <div id="resume-close">X</div>
@@ -100,7 +144,7 @@
             <h2>3D Website Controls</h2>
             <p>Scroll to zoom in or out. Hold left click and drag to look around the scene.
             Most elements found in this 2d resume can be found in the 3D scene by interacting 
-            with the TV, Arcade Machine, and Vending Machine. If you are using a mobile divice
+            with the TV, Arcade Machine, and Vending Machine. If you are using a mobile device
             everything will work but my code is not optimized for mobile.</p>
         
             <h2>Skills Summary</h2>
@@ -138,7 +182,7 @@
 
             <h2>Examples of Projects</h2>
 
-            <h3>Discords & Disocrd Bots:</h3>
+            <h3>Discords & Discord Bots:</h3>
             <ul>
                 <li><a href="https://discord.gg/Wgv7YkgBuP">Minecraft Server Discord</a></li>
                 <li><a href="https://discord.com/channels/minecraft-advertisement-993668335642349579">Advertising Discord</a></li>
@@ -162,38 +206,119 @@
         </div>
     </div>
 
-    <script>
-        const openResumeBtn = document.getElementById('open-resume-btn');
-        const resumeContainer = document.getElementById('resume-container');
-        const resumeCloseBtn = document.getElementById('resume-close');
-        let isPaused = false;
+    <!-- Blog Container -->
+  <div id="blog-container">
+    <div id="blog-close">X</div>
+    <div id="blog-content">
+      <h1>Cafe Stella Roasters SWOT & Event Analysis</h1>
 
-        // Function to pause the 3D scene
-        function pause3DScene() {
-            if (!isPaused) {
-                cancelAnimationFrame(animationFrameId);  // This stops the animation loop
-                isPaused = true;
-            }
-        }
+      <h2>Background/Introduction</h2>
+      <p>Cafe Stella Roasters is a family-owned, local coffee roasting company and bistro at 1907 Colonial Avenue in historic Ghent neighborhood of Norfolk, Virginia. Well-known for its Old World-style ambiance...</p>
 
-        // Function to resume the 3D scene
-        function resume3DScene() {
-            if (isPaused) {
-                animate();  // This resumes the animation loop
-                isPaused = false;
-            }
-        }
+      <h2>SWOT Analysis</h2>
+      <h3>Strengths</h3>
+      <ul>
+        <li>In-House Coffee Roasting</li>
+        <li>Varying Menu Options</li>
+        <li>Community Engagement in the Form of Live Music</li>
+      </ul>
 
-        openResumeBtn.addEventListener('click', () => {
-            resumeContainer.style.display = 'block';
-            pause3DScene();  // Pause the 3D scene when resume is opened
-        });
+      <h3>Weaknesses</h3>
+      <ul>
+        <li>Restricted Parking Area</li>
+        <li>Unreliable Customer Service</li>
+        <li>Congested During Peak Hours</li>
+      </ul>
 
-        resumeCloseBtn.addEventListener('click', () => {
-            resumeContainer.style.display = 'none';
-            resume3DScene();  // Resume the 3D scene when resume is closed
-        });
-    </script>
+      <h3>Opportunities</h3>
+      <ul>
+        <li>Expansion of Catering Services</li>
+        <li>Expanded Online Platform and Ordering</li>
+        <li>Local Artisan Partnerships</li>
+      </ul>
+
+      <h3>Threats</h3>
+      <ul>
+        <li>Intense Local Competition</li>
+        <li>Economic Depressions</li>
+        <li>Changing Consumer Tastes</li>
+      </ul>
+
+      <h2>Event Recommendation</h2>
+      <p>To further position itself as a community hub... host a "Local Artisans Market"...</p>
+
+      <h3>Target Market</h3>
+      <ul>
+        <li>Local residents of all ages</li>
+        <li>Adventure-seeking tourists</li>
+      </ul>
+
+      <h3>Location and Logistics</h3>
+      <p>The market would take place on Cafe Stella's property...</p>
+
+      <h3>Most Likely Benefits</h3>
+      <ul>
+        <li>Stronger Community Connections</li>
+        <li>Increased Sales and Foot Traffic</li>
+        <li>Increased Brand Image</li>
+      </ul>
+
+      <h2>References</h2>
+      <ul>
+        <li><a href="https://cafestellaroasters.com/">Cafe Stella Roasters Website</a></li>
+        <li><a href="https://cafestellaroasters.com/pages/print-menu">Print Menu</a></li>
+        <li><a href="https://www.instagram.com/cafestellaroasters/?hl=en">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const openResumeBtn = document.getElementById('open-resume-btn');
+    const resumeContainer = document.getElementById('resume-container');
+    const resumeCloseBtn = document.getElementById('resume-close');
+
+    const openBlogBtn = document.getElementById('open-blog-btn');
+    const blogContainer = document.getElementById('blog-container');
+    const blogCloseBtn = document.getElementById('blog-close');
+
+    let isPaused = false;
+
+    function pause3DScene() {
+      if (!isPaused) {
+        cancelAnimationFrame(animationFrameId);
+        isPaused = true;
+      }
+    }
+
+    function resume3DScene() {
+      if (isPaused) {
+        animate();
+        isPaused = false;
+      }
+    }
+
+    openResumeBtn.addEventListener('click', () => {
+      resumeContainer.style.display = 'block';
+      blogContainer.style.display = 'none';
+      pause3DScene();
+    });
+
+    resumeCloseBtn.addEventListener('click', () => {
+      resumeContainer.style.display = 'none';
+      resume3DScene();
+    });
+
+    openBlogBtn.addEventListener('click', () => {
+      blogContainer.style.display = 'block';
+      resumeContainer.style.display = 'none';
+      pause3DScene();
+    });
+
+    blogCloseBtn.addEventListener('click', () => {
+      blogContainer.style.display = 'none';
+      resume3DScene();
+    });
+  </script>
 
 
 </body>
